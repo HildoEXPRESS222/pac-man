@@ -1,0 +1,215 @@
+pip install pygame
+import pygame
+import sys
+import random
+
+# Initialize Pygame
+pygame.init()
+
+# Screen dimensions
+screen_width = 600
+screen_height = 400
+
+# Colors
+black = (0, 0, 0)
+white = (255, 255, 255)
+yellow = (255, 255, 0)
+blue = (0, 0, 255)
+red = (255, 0, 0)
+
+# Game settings
+cell_size = 20
+fps = 10
+
+# Initialize screen
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Pac-Man")
+
+# Load images
+pacman = pygame.Surface((cell_size, cell_size))
+pacman.fill(yellow)
+food = pygame.Surface((cell_size, cell_size))
+food.fill(white)
+
+# Pac-Man position
+pacman_x = screen_width // 2
+pacman_y = screen_height // 2
+
+# Food position
+food_x = random.randint(0, (screen_width // cell_size) - 1) * cell_size
+food_y = random.randint(0, (screen_height // cell_size) - 1) * cell_size
+
+# Direction
+direction = 'RIGHT'
+
+# Game clock
+clock = pygame.time.Clock()
+
+def draw_grid():
+    for x in range(0, screen_width, cell_size):
+        for y in range(0, screen_height, cell_size):
+            rect = pygame.Rect(x, y, cell_size, cell_size)
+            pygame.draw.rect(screen, blue, rect, 1)
+
+def move_pacman(direction, x, y):
+    if direction == 'UP':
+        y -= cell_size
+    elif direction == 'DOWN':
+        y += cell_size
+    elif direction == 'LEFT':
+        x -= cell_size
+    elif direction == 'RIGHT':
+        x += cell_size
+    return x, y
+
+def check_collision(x1, y1, x2, y2):
+    return x1 == x2 and y1 == y2
+
+# Game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                direction = 'UP'
+            elif event.key == pygame.K_DOWN:
+                direction = 'DOWN'
+            elif event.key == pygame.K_LEFT:
+                direction = 'LEFT'
+            elif event.key == pygame.K_RIGHT:
+                direction = 'RIGHT'
+
+    pacman_x, pacman_y = move_pacman(direction, pacman_x, pacman_y)
+
+    # Check for collision with food
+    if check_collision(pacman_x, pacman_y, food_x, food_y):
+        food_x = random.randint(0, (screen_width // cell_size) - 1) * cell_size
+        food_y = random.randint(0, (screen_height // cell_size) - 1) * cell_size
+
+    # Clear screen
+    screen.fill(black)
+
+    # Draw grid, Pac-Man, and food
+    draw_grid()
+    screen.blit(pacman, (pacman_x, pacman_y))
+    screen.blit(food, (food_x, food_y))
+
+    # Update display
+    pygame.display.flip()
+
+    # Control the game speed
+    clock.tick(fps)
+
+# Quit Pygame
+pygame.quit()
+sys.exit()
+import pygame
+import sys
+import random
+
+# Initialize Pygame
+pygame.init()
+
+# Screen dimensions
+screen_width = 600
+screen_height = 400
+
+# Colors
+black = (0, 0, 0)
+white = (255, 255, 255)
+yellow = (255, 255, 0)
+blue = (0, 0, 255)
+red = (255, 0, 0)
+
+# Game settings
+cell_size = 20
+fps = 10
+
+# Initialize screen
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Pac-Man")
+
+# Load images
+pacman = pygame.Surface((cell_size, cell_size))
+pacman.fill(yellow)
+food = pygame.Surface((cell_size, cell_size))
+food.fill(white)
+
+# Pac-Man position
+pacman_x = screen_width // 2
+pacman_y = screen_height // 2
+
+# Food position
+food_x = random.randint(0, (screen_width // cell_size) - 1) * cell_size
+food_y = random.randint(0, (screen_height // cell_size) - 1) * cell_size
+
+# Direction
+direction = 'RIGHT'
+
+# Game clock
+clock = pygame.time.Clock()
+
+def draw_grid():
+    for x in range(0, screen_width, cell_size):
+        for y in range(0, screen_height, cell_size):
+            rect = pygame.Rect(x, y, cell_size, cell_size)
+            pygame.draw.rect(screen, blue, rect, 1)
+
+def move_pacman(direction, x, y):
+    if direction == 'UP':
+        y -= cell_size
+    elif direction == 'DOWN':
+        y += cell_size
+    elif direction == 'LEFT':
+        x -= cell_size
+    elif direction == 'RIGHT':
+        x += cell_size
+    return x, y
+
+def check_collision(x1, y1, x2, y2):
+    return x1 == x2 and y1 == y2
+
+# Game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                direction = 'UP'
+            elif event.key == pygame.K_DOWN:
+                direction = 'DOWN'
+            elif event.key == pygame.K_LEFT:
+                direction = 'LEFT'
+            elif event.key == pygame.K_RIGHT:
+                direction = 'RIGHT'
+
+    pacman_x, pacman_y = move_pacman(direction, pacman_x, pacman_y)
+
+    # Check for collision with food
+    if check_collision(pacman_x, pacman_y, food_x, food_y):
+        food_x = random.randint(0, (screen_width // cell_size) - 1) * cell_size
+        food_y = random.randint(0, (screen_height // cell_size) - 1) * cell_size
+
+    # Clear screen
+    screen.fill(black)
+
+    # Draw grid, Pac-Man, and food
+    draw_grid()
+    screen.blit(pacman, (pacman_x, pacman_y))
+    screen.blit(food, (food_x, food_y))
+
+    # Update display
+    pygame.display.flip()
+
+    # Control the game speed
+    clock.tick(fps)
+
+# Quit Pygame
+pygame.quit()
+sys.exit()
+
+
